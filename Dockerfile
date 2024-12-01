@@ -6,8 +6,16 @@ RUN apt-get update && apt-get install -y ca-certificates && \
     apt-get install -y vfox git curl vim build-essential coreutils
 
 RUN useradd -m -s /bin/bash dev
-USER dev
 WORKDIR /home/dev
+
+ARG APT_PACKAGES=""
+RUN if [ -n "$APT_PACKAGES" ]; then \
+        apt-get install -y $APT_PACKAGES; \
+    fi && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+USER dev
 
 RUN echo 'eval "$(vfox activate bash)"' >> ~/.bashrc && \
     echo 'LC_ALL=C.UTF-8' >> ~/.bashrc
