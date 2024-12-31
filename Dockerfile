@@ -1,5 +1,8 @@
 FROM debian
 
+ENV TZ="Asia/Shanghai"
+ENV LANG="C.UTF-8"
+
 RUN apt-get update && apt-get install -y ca-certificates && \
     echo "deb [trusted=yes] https://apt.fury.io/versionfox/ /" | tee /etc/apt/sources.list.d/versionfox.list && \
     apt-get update && \
@@ -33,3 +36,6 @@ RUN bash -c ' \
             vfox use -g $tool; \
         done \
     '
+
+CMD ["sleep", "infinity"]
+
