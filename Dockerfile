@@ -6,7 +6,8 @@ ENV LANG="C.UTF-8"
 RUN apt-get update && apt-get install -y ca-certificates && \
     echo "deb [trusted=yes] https://apt.fury.io/versionfox/ /" | tee /etc/apt/sources.list.d/versionfox.list && \
     apt-get update && \
-    apt-get install -y vfox git curl vim build-essential coreutils
+    apt-get install -y vfox git curl vim build-essential coreutils bash-completion sqlite3 \
+                       iputils-ping dnsutils socat
 
 RUN useradd -m -s /bin/bash dev
 WORKDIR /home/dev
